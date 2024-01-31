@@ -2,9 +2,10 @@ import React from "react";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { LoginPage } from "./pages/LoginPage";
-import RegisterPage from "./pages/RegisterPage";
+import RegisterClientPage from "./pages/RegisterClientPage";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import HomePage from "./pages/HomePage";
+import RegisterPage from "./pages/RegisterPage";
 
 function App() {
    return (
@@ -13,6 +14,7 @@ function App() {
             <Route element={<HomePage />} path="/" />
             <Route element={<LoginPage />} path="/login" />
             <Route element={<RegisterPage />} path="/register" />
+            <Route element={<RegisterClientPage />} path="/registerClient" />
          </Routes>
       </BrowserRouter>
    );

@@ -10,7 +10,7 @@ function LoginFormComponent() {
       password: string;
    };
 
-   const { getUser, setUser } = useLocalStorage("value");
+   const { setUser } = useLocalStorage("value");
 
    const navigate = useNavigate();
 
@@ -26,6 +26,7 @@ function LoginFormComponent() {
       });
    };
 
+   // when user loggedIn, saves token in localStorage and regirect to home page
    const handleSubmit = async (e: React.FormEvent) => {
       e.preventDefault();
 
