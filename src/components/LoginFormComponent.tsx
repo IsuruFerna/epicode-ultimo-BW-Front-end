@@ -1,12 +1,18 @@
 import { useState } from "react";
 import { Button } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
+import { useLocalStorage } from "../useLocalStorage";
+import { useNavigate } from "react-router-dom";
 
 function LoginFormComponent() {
    type LoginData = {
       email: string;
       password: string;
    };
+
+   const { getUser, setUser } = useLocalStorage("value");
+
+   const navigate = useNavigate();
 
    const [loginForm, setLoginForm] = useState<LoginData>({
       email: "",
@@ -33,9 +39,10 @@ function LoginFormComponent() {
             }
          );
          if (response.ok) {
-            const data = await response.json();
-            console.log(data);
-            alert("login successfully!");
+            const data: object = await response.json();
+            setUser(data);
+            navigate("/");
+            // alert("login successfully!");
          } else {
             alert("error!");
          }
