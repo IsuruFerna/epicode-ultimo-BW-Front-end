@@ -10,7 +10,9 @@ export const LoginPage = () => {
             </Row>
             <Row>
                <Col>
-                  <LoginFormComponent />
+                  <div className="w-50 mx-auto">
+                     <LoginFormComponent />
+                  </div>
                </Col>
             </Row>
          </Container>
