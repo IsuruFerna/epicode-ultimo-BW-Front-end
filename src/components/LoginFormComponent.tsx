@@ -3,6 +3,8 @@ import { Button } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
 import { useLocalStorage } from "../useLocalStorage";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setUserAction } from "../redux/actions";
 
 function LoginFormComponent() {
    type LoginData = {
@@ -11,8 +13,9 @@ function LoginFormComponent() {
    };
 
    const { setUser } = useLocalStorage("value");
-
    const navigate = useNavigate();
+
+   const dispath = useDispatch();
 
    const [loginForm, setLoginForm] = useState<LoginData>({
       email: "",
@@ -26,7 +29,10 @@ function LoginFormComponent() {
       });
    };
 
-   // when user loggedIn, saves token in localStorage and regirect to home page
+   // when user loggedIn,
+   // saves token in localStorage,
+   // save user data in redux store
+   // and regirects to home page
    const handleSubmit = async (e: React.FormEvent) => {
       e.preventDefault();
 
@@ -40,9 +46,12 @@ function LoginFormComponent() {
             }
          );
          if (response.ok) {
+            // saves data in local, redux and redirects
             const data: object = await response.json();
             setUser(data);
+            dispath(setUserAction(data));
             navigate("/");
+
             // alert("login successfully!");
          } else {
             alert("error!");
