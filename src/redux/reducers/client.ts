@@ -1,4 +1,4 @@
-import { SET_CLIENT } from "../actions";
+import { SET_CLIENT, SET_CLIENT_ADDRESS } from "../actions";
 
 type Client = {
    regioneSociale: string;
@@ -10,10 +10,17 @@ type ClientState = {
    client: Client;
 };
 
-type ClientAction = {
+type SetClientAction = {
    type: typeof SET_CLIENT;
    payload: Client;
 };
+
+type SetClientAddressAction = {
+   type: typeof SET_CLIENT_ADDRESS;
+   payload: string | null;
+};
+
+type ClientAction = SetClientAction | SetClientAddressAction;
 
 const initialState: ClientState = {
    client: {
@@ -29,6 +36,12 @@ const clientReducer = (state = initialState, action: ClientAction) => {
          return {
             ...state,
             client: action.payload,
+         };
+
+      case SET_CLIENT_ADDRESS:
+         return {
+            ...state,
+            client: { ...state.client, idIndirizzo: action.payload },
          };
 
       default:
