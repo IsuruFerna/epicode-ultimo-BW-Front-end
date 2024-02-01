@@ -3,9 +3,7 @@ import { Button } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
 import { useLocalStorage } from "../useLocalStorage";
 import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-
-import { User } from "../redux/reducers/user";
+import { useDispatch } from "react-redux";
 import { setUserAction } from "../redux/actions";
 
 function LoginFormComponent() {
@@ -14,14 +12,9 @@ function LoginFormComponent() {
       password: string;
    };
 
-   type ReduxState = {
-      user: User;
-   };
-
    const { setUser } = useLocalStorage("value");
    const navigate = useNavigate();
 
-   const user = useSelector((state: ReduxState) => state.user);
    const dispath = useDispatch();
 
    const [loginForm, setLoginForm] = useState<LoginData>({
@@ -59,7 +52,6 @@ function LoginFormComponent() {
             dispath(setUserAction(data));
             navigate("/");
 
-            console.log("redux user: ", user);
             // alert("login successfully!");
          } else {
             alert("error!");
