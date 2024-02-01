@@ -6,7 +6,7 @@ import RegisterClientPage from "./pages/RegisterClientPage";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import RegisterPage from "./pages/RegisterPage";
-import AddressComp from "./components/AddressComp";
+import AddressComp from "./components/AddressSedeOperativaComp";
 
 function App() {
    return (
@@ -16,7 +16,6 @@ function App() {
             <Route element={<LoginPage />} path="/login" />
             <Route element={<RegisterPage />} path="/register" />
             <Route element={<RegisterClientPage />} path="/registerClient" />
-            <Route element={<AddressComp />} path="/address" />
          </Routes>
       </BrowserRouter>
    );

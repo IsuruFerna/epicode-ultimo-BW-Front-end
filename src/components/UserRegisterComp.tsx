@@ -63,7 +63,8 @@ function UserRegisterComp() {
    };
 
    return (
-      <Form onSubmit={handleSubmit}>
+      <>
+         {/* <Form onSubmit={handleSubmit}> */}
          <Row className="mb-3">
             <Form.Group as={Col} controlId="formGridName">
                <Form.Label>Name</Form.Label>
@@ -133,7 +134,8 @@ function UserRegisterComp() {
          <Button variant="success" type="submit">
             Register
          </Button>
-      </Form>
+         {/* </Form> */}
+      </>
    );
 }
 

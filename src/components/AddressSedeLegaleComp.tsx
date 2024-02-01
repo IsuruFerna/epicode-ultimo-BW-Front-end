@@ -6,14 +6,17 @@ import Row from "react-bootstrap/Row";
 import { useLocalStorage } from "../useLocalStorage";
 import { useDispatch, useSelector } from "react-redux";
 import { ReduxState } from "../pages/HomePage";
-import { setClientAddress } from "../redux/actions";
+import {
+   setClientAddressSedeLegale,
+   setClientAddressSedeOperativa,
+} from "../redux/actions";
 
 type FormAddress = {
    via: string;
    civico: string;
    locality: string;
    CAP: string;
-   comune: object;
+   comune: null | string | number;
 };
 
 type Provincia = {
@@ -30,28 +33,28 @@ type ComuneData = {
    provincia: Provincia;
 };
 
-function AddressComp() {
-   const [formData, setFormData] = useState<FormAddress>({
-      via: "",
-      civico: "",
-      locality: "",
-      CAP: "",
-      comune: {},
-   });
+type AddrerssFormProps = {
+   formData: FormAddress;
+   setFormData: React.Dispatch<React.SetStateAction<FormAddress>>;
+};
 
+const AddressSedeLegaleComp: React.FC<AddrerssFormProps> = ({
+   formData,
+   setFormData,
+}) => {
    const [comune, setComune] = useState<string>("");
    const [listComune, setListComune] = useState([]);
    const [isComuneChoosed, setIsComuneChoosed] = useState(false);
 
    const client = useSelector((state: ReduxState) => state);
-   const dispath = useDispatch();
+   // const dispath = useDispatch();
 
    const { getUser } = useLocalStorage("value");
 
    const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-      setIsComuneChoosed(false);
       if (event.target.name === "comune") {
          setComune(event.target.value);
+         setIsComuneChoosed(false);
       } else {
          setFormData({
             ...formData,
@@ -60,17 +63,16 @@ function AddressComp() {
       }
    };
 
-   const handleSubmit = (event: React.FormEvent) => {
-      event.preventDefault();
-      console.log(formData);
-   };
-
    // set comune id
    const handleClick = (e: React.MouseEvent<HTMLLIElement>) => {
       const id = e.currentTarget.getAttribute("data-id");
       const target = e.target as HTMLElement;
       console.log(target.innerText, id);
-      dispath(setClientAddress(id));
+      setFormData({
+         ...formData,
+         comune: id,
+      });
+      // dispath(setClientAddressSedeLegale(id));
       setComune(target.innerText);
       setIsComuneChoosed(true);
       setListComune([]);
@@ -101,7 +103,8 @@ function AddressComp() {
    }, [comune]);
 
    return (
-      <Form onSubmit={handleSubmit}>
+      <>
+         <p className="mb-2 mt-4">Indirizzo Sede Legale</p>
          <Row className="mb-3">
             <Form.Group as={Col} controlId="formGridVia">
                <Form.Label>Via</Form.Label>
@@ -162,12 +165,8 @@ function AddressComp() {
                ))}
             </ul>
          )}
-
-         <Button variant="primary" type="submit">
-            Submit
-         </Button>
-      </Form>
+      </>
    );
-}
+};
 
-export default AddressComp;
+export default AddressSedeLegaleComp;
