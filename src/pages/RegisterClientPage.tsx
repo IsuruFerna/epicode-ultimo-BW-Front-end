@@ -1,4 +1,11 @@
-import { Button, Col, Container, Form, Row } from "react-bootstrap";
+import {
+   Button,
+   Col,
+   Container,
+   FloatingLabel,
+   Form,
+   Row,
+} from "react-bootstrap";
 import ClientRegisterFormComp, {
    FormClientRegistrationData,
 } from "../components/ClientRegisterFormComp";
@@ -41,6 +48,8 @@ const RegisterClientPage = () => {
       CAP: "",
       comune: null,
    });
+
+   const [workType, setWorkType] = useState("");
 
    const request: object = {
       addressSedeLegale: {
@@ -120,7 +129,7 @@ const RegisterClientPage = () => {
                   // idIndirizzoSedeLegale: formClientRegistrationData,
 
                   urlLogoAziendale: "",
-                  tipoAziendale: "",
+                  tipoAziendale: workType,
                   fatturatoAnnuale: "",
                }),
                headers: {
@@ -136,6 +145,7 @@ const RegisterClientPage = () => {
             // dispath(setUserAction(data));
             // navigate("/");
             console.log(data);
+            console.log("client save");
 
             // alert("login successfully!");
          } else {
@@ -167,6 +177,23 @@ const RegisterClientPage = () => {
                         formData={formDataSedeLegale}
                         setFormData={setFormDataSedeLegale}
                      />
+
+                     <FloatingLabel
+                        className="mb-3"
+                        controlId="floatingSelectGrid"
+                        label="Work Type"
+                     >
+                        <Form.Select
+                           aria-label="Floating label select example"
+                           onChange={(event) => setWorkType(event.target.value)}
+                        >
+                           <option>Select work type</option>
+                           <option value="PA">PA</option>
+                           <option value="SAS">SAS</option>
+                           <option value="SPA">SPA</option>
+                           <option value="SRL">SRL</option>
+                        </Form.Select>
+                     </FloatingLabel>
                      <Button variant="primary" type="submit">
                         Submit
                      </Button>
