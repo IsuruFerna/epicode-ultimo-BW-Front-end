@@ -63,77 +63,79 @@ function UserRegisterComp() {
    };
 
    return (
-      <Form onSubmit={handleSubmit}>
-         <Row className="mb-3">
-            <Form.Group as={Col} controlId="formGridName">
-               <Form.Label>Name</Form.Label>
+      <>
+         <Form onSubmit={handleSubmit}>
+            <Row className="mb-3">
+               <Form.Group as={Col} controlId="formGridName">
+                  <Form.Label>Name</Form.Label>
+                  <Form.Control
+                     name="name"
+                     onChange={handleInputChange}
+                     value={formData.name}
+                     placeholder="Mark"
+                  />
+               </Form.Group>
+
+               <Form.Group as={Col} controlId="formGridSurname">
+                  <Form.Label>Surname</Form.Label>
+                  <Form.Label>Name</Form.Label>
+                  <Form.Control
+                     name="surname"
+                     onChange={handleInputChange}
+                     value={formData.surname}
+                     placeholder="Anthony"
+                  />
+               </Form.Group>
+            </Row>
+
+            <Form.Group className="mb-3" controlId="formGridUsername">
+               <Form.Label>User Name</Form.Label>
                <Form.Control
-                  name="name"
+                  name="username"
                   onChange={handleInputChange}
-                  value={formData.name}
-                  placeholder="Mark"
+                  value={formData.username}
+                  placeholder="Mark38"
                />
             </Form.Group>
 
-            <Form.Group as={Col} controlId="formGridSurname">
-               <Form.Label>Surname</Form.Label>
-               <Form.Label>Name</Form.Label>
+            <Form.Group className="mb-3" controlId="formGridEmail">
+               <Form.Label>Email</Form.Label>
                <Form.Control
-                  name="surname"
+                  name="email"
                   onChange={handleInputChange}
-                  value={formData.surname}
-                  placeholder="Anthony"
+                  value={formData.email}
+                  type="email"
+                  placeholder="Enter email"
                />
             </Form.Group>
-         </Row>
 
-         <Form.Group className="mb-3" controlId="formGridUsername">
-            <Form.Label>User Name</Form.Label>
-            <Form.Control
-               name="username"
-               onChange={handleInputChange}
-               value={formData.username}
-               placeholder="Mark38"
-            />
-         </Form.Group>
+            <Form.Group className="mb-3" controlId="formGridPassword">
+               <Form.Label>Password</Form.Label>
+               <Form.Control
+                  name="password"
+                  onChange={handleInputChange}
+                  value={formData.password}
+                  type="password"
+                  placeholder="Password"
+               />
+            </Form.Group>
 
-         <Form.Group className="mb-3" controlId="formGridEmail">
-            <Form.Label>Email</Form.Label>
-            <Form.Control
-               name="email"
-               onChange={handleInputChange}
-               value={formData.email}
-               type="email"
-               placeholder="Enter email"
-            />
-         </Form.Group>
+            <Form.Group className="mb-3" controlId="formGridPasswordConfirm">
+               <Form.Label>Confirm Password</Form.Label>
+               <Form.Control
+                  name="confirm"
+                  onChange={handleInputChange}
+                  value={formData.confirm}
+                  type="password"
+                  placeholder="Confirm Password"
+               />
+            </Form.Group>
 
-         <Form.Group className="mb-3" controlId="formGridPassword">
-            <Form.Label>Password</Form.Label>
-            <Form.Control
-               name="password"
-               onChange={handleInputChange}
-               value={formData.password}
-               type="password"
-               placeholder="Password"
-            />
-         </Form.Group>
-
-         <Form.Group className="mb-3" controlId="formGridPasswordConfirm">
-            <Form.Label>Confirm Password</Form.Label>
-            <Form.Control
-               name="confirm"
-               onChange={handleInputChange}
-               value={formData.confirm}
-               type="password"
-               placeholder="Confirm Password"
-            />
-         </Form.Group>
-
-         <Button variant="success" type="submit">
-            Register
-         </Button>
-      </Form>
+            <Button variant="success" type="submit">
+               Register
+            </Button>
+         </Form>
+      </>
    );
 }
 

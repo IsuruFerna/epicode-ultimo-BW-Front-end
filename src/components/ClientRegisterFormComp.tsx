@@ -4,47 +4,44 @@ import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 
-function ClientRegisterFormComp() {
-   type FormData = {
-      partitaIva: string;
-      nomeContattato: string;
-      telContattato: string;
-      telAziendale: string;
-      emailAziendale: string;
-      emailPec: string;
-      regione: string;
-   };
+export type FormClientRegistrationData = {
+   partitaIva: string;
+   nomeContattato: string;
+   telefonoContatto: string;
+   telefonoAziendale: string;
+   emailAziendale: string;
+   emailContatto: string;
+   pecAziendale: string;
+   ragioneSociale: string;
+};
 
-   const [formData, setFormData] = useState<FormData>({
-      partitaIva: "",
-      nomeContattato: "",
-      telContattato: "",
-      telAziendale: "",
-      emailAziendale: "",
-      emailPec: "",
-      regione: "",
-   });
+type FormProps = {
+   formClientRegistrationData: FormClientRegistrationData;
+   setformClientRegistrationData: React.Dispatch<
+      React.SetStateAction<FormClientRegistrationData>
+   >;
+};
 
+const ClientRegisterFormComp: React.FC<FormProps> = ({
+   formClientRegistrationData,
+   setformClientRegistrationData,
+}) => {
    const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-      setFormData({
-         ...formData,
+      setformClientRegistrationData({
+         ...formClientRegistrationData,
          [event.target.name]: event.target.value,
       });
    };
 
-   const handleSubmit = (event: React.FormEvent) => {
-      event.preventDefault();
-      console.log(formData);
-   };
-
    return (
-      <Form onSubmit={handleSubmit}>
+      <>
+         {/* <Form onSubmit={handleSubmit}> */}
          <Form.Group className="mb-3" controlId="formGridIVA">
             <Form.Label>Partita IVA</Form.Label>
             <Form.Control
                name="partitaIva"
                onChange={handleInputChange}
-               value={formData.partitaIva}
+               value={formClientRegistrationData.partitaIva}
                placeholder="IT 99999999999"
             />
          </Form.Group>
@@ -54,7 +51,7 @@ function ClientRegisterFormComp() {
             <Form.Control
                name="nomeContattato"
                onChange={handleInputChange}
-               value={formData.nomeContattato}
+               value={formClientRegistrationData.nomeContattato}
                placeholder="Marco"
             />
          </Form.Group>
@@ -63,9 +60,9 @@ function ClientRegisterFormComp() {
             <Form.Group as={Col} controlId="formGridPhone">
                <Form.Label>Telefono Contattato</Form.Label>
                <Form.Control
-                  name="telContattato"
+                  name="telefonoContatto"
                   onChange={handleInputChange}
-                  value={formData.telContattato}
+                  value={formClientRegistrationData.telefonoContatto}
                   type="tel"
                   placeholder="3341238750"
                />
@@ -74,45 +71,54 @@ function ClientRegisterFormComp() {
             <Form.Group as={Col} controlId="formGridPhoneAzienda">
                <Form.Label>Telefono Aziendale</Form.Label>
                <Form.Control
-                  name="telAziendale"
+                  name="telefonoAziendale"
                   onChange={handleInputChange}
-                  value={formData.telAziendale}
+                  value={formClientRegistrationData.telefonoAziendale}
                   type="tel"
                   placeholder="0451238750"
                />
             </Form.Group>
          </Row>
 
-         <Row className="mb-3">
-            <Form.Group as={Col} controlId="formGridEmail">
-               <Form.Label>Email Aziendale</Form.Label>
-               <Form.Control
-                  name="emailAziendale"
-                  onChange={handleInputChange}
-                  value={formData.emailAziendale}
-                  type="email"
-                  placeholder="Email Aziendale"
-               />
-            </Form.Group>
+         <Form.Group className="mb-3" controlId="formGridEmailContatto">
+            <Form.Label>Email Contatto</Form.Label>
+            <Form.Control
+               name="emailContatto"
+               onChange={handleInputChange}
+               value={formClientRegistrationData.emailContatto}
+               type="email"
+               placeholder="Email Contatto"
+            />
+         </Form.Group>
 
-            <Form.Group as={Col} controlId="formGridPec">
-               <Form.Label>Email PEC</Form.Label>
-               <Form.Control
-                  name="emailPec"
-                  onChange={handleInputChange}
-                  value={formData.emailPec}
-                  type="email"
-                  placeholder="Email PEC"
-               />
-            </Form.Group>
-         </Row>
+         <Form.Group className="mb-3" controlId="formGridEmailAziendale">
+            <Form.Label>Email Aziendale</Form.Label>
+            <Form.Control
+               name="emailAziendale"
+               onChange={handleInputChange}
+               value={formClientRegistrationData.emailAziendale}
+               type="email"
+               placeholder="Email Aziendale"
+            />
+         </Form.Group>
+
+         <Form.Group className="mb-3" controlId="formGridPec">
+            <Form.Label>Email PEC</Form.Label>
+            <Form.Control
+               name="pecAziendale"
+               onChange={handleInputChange}
+               value={formClientRegistrationData.pecAziendale}
+               type="email"
+               placeholder="Email PEC"
+            />
+         </Form.Group>
 
          <Form.Group className="mb-3" controlId="formGridReagion">
             <Form.Label>Regione Sociale</Form.Label>
             <Form.Control
-               name="regione"
+               name="ragioneSociale"
                onChange={handleInputChange}
-               value={formData.regione}
+               value={formClientRegistrationData.ragioneSociale}
                placeholder="Toscana"
             />
          </Form.Group>
@@ -151,11 +157,12 @@ function ClientRegisterFormComp() {
             <Form.Check type="checkbox" label="Check me out" />
          </Form.Group> */}
 
-         <Button variant="primary" type="submit">
+         {/* <Button variant="primary" type="submit">
             Submit
-         </Button>
-      </Form>
+         </Button> */}
+         {/* </Form> */}
+      </>
    );
-}
+};
 
 export default ClientRegisterFormComp;
